@@ -1,0 +1,280 @@
+.h1{
+  font-size: 40px;
+  font-weight: 200;
+  line-height: 44px;
+  margin-bottom: 0px;
+}
+.h4{
+  font-size: 28px;
+  font-weight: 100;
+  line-height: 44px;
+}
+.h2{
+  font-size: 28px;
+  font-weight: 200;
+  line-height: 44px;
+}
+.h3{
+  font-size: 24px;
+  font-weight: 200;
+  line-height: 44px;
+}
+@media screen and (min-width: 600px) {
+body {
+    width: 1000px;
+    margin: 40px auto;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+.logo{
+  margin: -30px 0px 30px 0px;
+  width: 300px;
+}
+}
+
+@media screen and (min-width: 320px) and (max-width: 600px) {
+body {
+    width: 100%;
+    margin: 40px auto;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+.logo{
+  margin: -30px 0px 30px 0px;
+  width: 50%;
+}
+
+table, thead, tbody, th, td, tr { 
+    display: block; 
+  }
+thead tr { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+table.bordered td { 
+    /* Behave  like a "row" */
+    border: none;
+    position: relative;
+    text-align: right;
+  }
+table.bordered td.grey { 
+    /* Behave  like a "row" */
+    border: none;
+    position: relative;
+    text-align: left;
+  }
+td:before { 
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 10px;
+    left: 10px;
+    width: 50%; 
+    padding-right: 0px; 
+    white-space: nowrap;
+    text-align: right;
+  } 
+  td:nth-of-type(1):before { content: " ";}
+  td:nth-of-type(2):before { content: "USD Amount"; }
+  td:nth-of-type(3):before { content: "Limit"; }
+  td:nth-of-type(4):before { content: "Utilisation"; }
+  td:nth-of-type(5):before { content: "Breakdown"; }
+  td:nth-of-type(6):before { content: "Tiers"; }
+
+table.bordered td.total {
+	text-align: left;
+	background-color: #d1cece}
+
+  .table1 td:nth-of-type(1):before { content: " ";}
+  .table1 td:nth-of-type(2):before { content: "Exposure - Base CCY"; }
+  .table1 td.total:nth-of-type(2):before { content: " "; }
+  .table1 td:nth-of-type(3):before { content: "Conv Rate"; }
+  .table1 td:nth-of-type(4):before { content: "Exposure USD Equivalent"; }
+  .table1 td:nth-of-type(5):before { content: "NOP (USD)"; }
+
+  .table2 td:nth-of-type(1):before { content: " ";}
+  .table2 td:nth-of-type(2):before { content: "Position"; }
+  .table2 td:nth-of-type(3):before { content: "Conv Rate"; }
+  .table2 td:nth-of-type(4):before { content: "USD Equivalent"; }
+
+.tableTiers td:before { 
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 10px;
+    left: 10px;
+    width: 50%; 
+    padding-right: 0px; 
+    white-space: nowrap;
+    text-align: left;
+  } 
+  .tableTiers td:nth-of-type(1):before { content: " ";}
+  .tableTiers td:nth-of-type(2):before { content: "BaseExposure Tier1"; }
+  .tableTiers td:nth-of-type(3):before { content: "NOP Tier 1"; }
+  .tableTiers td:nth-of-type(4):before { content: "BaseExposure Tier2"; }
+  .tableTiers td:nth-of-type(5):before { content: "NOP Tier 2"; }
+  .tableTiers td:nth-of-type(6):before { content: "BaseExposure Tier3"; }
+  .tableTiers td:nth-of-type(7):before { content: "NOP Tier 3"; }
+  .tableTiers td:nth-of-type(8):before { content: "BaseExposure Tier4"; }
+  .tableTiers td:nth-of-type(9):before { content: "NOP Tier 4"; }
+  .tableTiers td:nth-of-type(10):before { content: "BaseExposure Tier5"; }
+  .tableTiers td:nth-of-type(11):before { content: "NOP Tier 5"; }
+}
+
+
+a.thead{
+  text-decoration: underline;
+  color:#fff;
+}
+a{
+  color:#dc4814;
+  fon-weight: bold;
+}
+
+/* button div */
+#buttons {
+  /*padding-top: 50px;*/
+  text-align: center;
+}
+
+/* start da css for da buttons */
+.btn {
+  border-radius: 15px;
+  padding: 10px 15px;
+  font-size: 16px;
+  text-decoration: none;
+  /*margin: 0px -340px -200px 0px;*/
+  margin: center;
+  color: #fff;
+  position: relative;
+  background-color: #000;
+  display: inline-block;
+}
+
+
+.btn:active {
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  box-shadow: 0px 1px 0px 0px;
+}
+
+.blue {
+  background-color: #55acee;
+  box-shadow: 0px 5px 0px 0px #3C93D5;
+}
+
+table {
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0;
+    width: 100%;    
+  background-color: #fff;
+}
+
+.bordered {
+    border: solid #000 1px;
+}
+
+thead {
+  color:#fff;
+  background-color:#000;
+  border: solod #fff 1px;
+  text-transform: uppercase; 
+  }
+  
+.bordered tr:hover {
+    background: #e4e1e0;
+    -o-transition: all 0s ease-in-out;
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    -ms-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out;     
+}    
+    
+.bordered td, .bordered th {
+    border-left: 1px solid #000;
+    border-top: 1px solid #000;
+    padding: 10px;
+    text-align:left;    
+}
+td.grey{
+  background-color: #d1cece;
+}
+
+
+
+table.bordered td.left-align {
+    text-align: right;
+}
+
+table.bordered td.center-align {
+    text-align: center;
+}
+
+.bordered th {
+    background-color: #000000; 
+}
+
+.bordered td:first-child, .bordered th:first-child {
+    border-left: none;
+  
+}
+
+
+
+/* Full-width inputs */
+ianput[type=text], input[type=password] {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 5px 0 20px;
+    display: inline-block;
+    border: none;
+  border-radius: 10px;
+    box-sizing: border-box;
+  font-weight: 700px;
+}
+
+/* Set a style for all buttons */
+button.form {
+    background-color: #000000;
+  border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  font-size: 16px;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Add padding to containers */
+.container {
+    padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+  padding: 100px;
+  align-self:center;
+}
+
+@media screen and (min-width: 320px) and (max-width: 360px) {
+  form {
+    border: none;
+  width: 100%;
+  margin: 40px auto;
+}
+}
+@media screen and (min-width: 360px) {
+  form {
+    border: none;
+  width: 360px;
+  margin: 40px auto;
+}
+}
