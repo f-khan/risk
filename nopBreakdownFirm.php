@@ -104,8 +104,9 @@ order by clientGroup, displayCcy;
                 ";
 
         $result = mysql_query($sql);
-        $query_clientFirm = "select clientFirm from do.nop_clients where clientGroup = '$clientFirm' order by clientFirm";
-        $result_clientFirm = mysql_query($query_clientFirm);
+        $query_clientFirm = mysql_query("select clientLimit from do.nop_clients where clientFirm = '$clientFirm' order by clientFirm;");
+        $result_clientFirm_limit = mysql_fetch_assoc($query_clientFirm);
+        $clientFirm_Limit = $result_clientFirm_limit['clientLimit'];
 
         $query = mysql_query($sql);
         $row = mysql_fetch_array($query);
@@ -168,7 +169,7 @@ order by clientGroup, displayCcy;
                             echo "<td class='grey'>".$row['displayCcy']."</td>";
                             if ($row['amt'] < 0)
                             {
-                                echo "<td class='left-align' width='0px' style='color:red;'>".negformat(number_format($row['amt']))."</td>";
+                                echo "<td class='left-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['amt']))."</td>";
                             }
                             else
                             {
@@ -184,12 +185,9 @@ order by clientGroup, displayCcy;
                                 echo "<td class='left-align' width='0px'>".number_format($row['USDRate'],6)."</td>";
                             }
 
-
-                            //echo "<td class='left-align' width='0px'>".number_format($row['USDRate'],6)."</td>";
-
                             if ($row['USDEquiv'] < 0)
                             {
-                                echo "<td class='left-align' width='0px' style='color:red;'>".negformat(number_format($row['USDEquiv']))."</td>";
+                                echo "<td class='left-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['USDEquiv']))."</td>";
                             }
                             else
                             {
@@ -203,8 +201,8 @@ order by clientGroup, displayCcy;
                     }
                 }
                 echo "<tr>";
-                    echo "<td colspan = '4' class = 'total'><h3>Total</h3></td>";
-                    echo "<td class='left-align' width='0px'><h3>".number_format($total_USD_NOP_sum)."</h3></td>";
+                    echo "<td colspan = '4' class = 'total'><b>Total</b></td>";
+                    echo "<td class='left-align' width='0px'><b>".number_format($total_USD_NOP_sum)."</b></td>";
                 echo "</tr>";
             }else
             {
@@ -243,7 +241,7 @@ $sql2 = "CALL do.nop_position_breakdown_firm('$clientGroup', '$clientFirm')";
                         echo "<td class='grey'>".$row['symbol']."</td>";
                         if ($row['position'] < 0)
                         {
-                            echo "<td class='left-align' width='0px' style='color:red;'>".negformat(number_format($row['position']))."</td>";
+                            echo "<td class='left-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['position']))."</td>";
                         }
                         else
                         {
@@ -254,7 +252,7 @@ $sql2 = "CALL do.nop_position_breakdown_firm('$clientGroup', '$clientFirm')";
 
                         /*if ($row['amt'] < 0)
                         {
-                            echo "<td class='left-align' width='0px' style='color:red;'>".negformat(number_format($row['amt']))."</td>";
+                            echo "<td class='left-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['amt']))."</td>";
                         }
                         else
                         {

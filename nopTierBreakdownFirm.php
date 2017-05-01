@@ -172,7 +172,7 @@ group by displayCcy;";
                 <th style="text-align: center;" colspan="2">Tier 5</th>
             </tr>
             <tr>     
-                <th style="text-align: left;">CCY</th>
+                <th style="text-align: left;" width="80px">CCY</th>
                 <th style="text-align: center;">Base Exposure</th>
                 <th style="text-align: center;">NOP</th>
                 <th style="text-align: center;">Base Exposure</th>
@@ -211,35 +211,35 @@ group by displayCcy;";
                         echo "<td class='center-align'>".number_format($row['tier5NOP'])."</td>";
                         */
                         if ($row['tier1BaseExposure'] < 0){
-                            echo "<td class='center-align' width='0px' style='color:red;'>".negformat(number_format($row['tier1BaseExposure']) )."</td>";
+                            echo "<td class='center-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['tier1BaseExposure']) )."</td>";
                         }else{
                         echo "<td class='center-align' width='0px'>".negformat(number_format($row['tier1BaseExposure']) )."</td>";
                         }
                         echo "<td class='center-align'>".number_format($row['tier1NOP'])."</td>";
 
                         if ($row['tier2BaseExposure'] < 0){
-                            echo "<td class='center-align' width='0px' style='color:red;'>".negformat(number_format($row['tier2BaseExposure']) )."</td>";
+                            echo "<td class='center-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['tier2BaseExposure']) )."</td>";
                         }else{
                         echo "<td class='center-align' width='0px'>".negformat(number_format($row['tier2BaseExposure']) )."</td>";
                         }
                         echo "<td class='center-align'>".number_format($row['tier2NOP'])."</td>";
 
                         if ($row['tier3BaseExposure'] < 0){
-                            echo "<td class='center-align' width='0px' style='color:red;'>".negformat(number_format($row['tier3BaseExposure']) )."</td>";
+                            echo "<td class='center-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['tier3BaseExposure']) )."</td>";
                         }else{
                         echo "<td class='center-align' width='0px'>".negformat(number_format($row['tier3BaseExposure']) )."</td>";
                         }
                         echo "<td class='center-align'>".number_format($row['tier3NOP'])."</td>";
 
                         if ($row['tier4BaseExposure'] < 0){
-                            echo "<td class='center-align' width='0px' style='color:red;'>".negformat(number_format($row['tier4BaseExposure']) )."</td>";
+                            echo "<td class='center-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['tier4BaseExposure']) )."</td>";
                         }else{
                         echo "<td class='center-align' width='0px'>".negformat(number_format($row['tier4BaseExposure']) )."</td>";
                         }
                         echo "<td class='center-align'>".number_format($row['tier4NOP'])."</td>";
 
                         if ($row['tier5BaseExposure'] < 0){
-                            echo "<td class='center-align' width='0px' style='color:red;'>".negformat(number_format($row['tier5BaseExposure']) )."</td>";
+                            echo "<td class='center-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['tier5BaseExposure']) )."</td>";
                         }else{
                         echo "<td class='center-align' width='0px'>".negformat(number_format($row['tier5BaseExposure']) )."</td>";
                         }
@@ -252,7 +252,7 @@ group by displayCcy;";
                     $sum5 += $row['tier5NOP'];
                 }
                 echo "<tr>";
-                    echo "<td class='grey'><h4>Total</h4></td>";
+                    echo "<td class='grey'><b>Total</b></td>";
                     $percent1 = (($sum1/$limits['tier1'])*100);
                     $percent2 = (($sum2/$limits['tier2'])*100);
                     $percent3 = (($sum3/$limits['tier3'])*100);
@@ -261,64 +261,64 @@ group by displayCcy;";
 
                     echo "<td class='center-align' width='0px'></td>";
                     if ($percent1 >= 100.00)
-                    {echo "<td class='center-align' width='0px' style='background-color:#dc4814;'><h4>".number_format($sum1)."</h4></td>";
+                    {echo "<td class='center-align' width='0px' style='background-color:#dc4814;'><b>".number_format($sum1)."</b></td>";
                     }elseif ($percent1 >= 75.00)
-                    {echo "<td class='center-align' width='0px' style='background-color:#e99e7c;'><h4>".number_format($sum1)."</h4></td>";
+                    {echo "<td class='center-align' width='0px' style='background-color:#e99e7c;'><b>".number_format($sum1)."</b></td>";
                     }else
-                    {echo "<td class='center-align' width='0px'><h4>".number_format($sum1)."</h4></td>";
+                    {echo "<td class='center-align' width='0px'><b>".number_format($sum1)."</b></td>";
                     }
 
                     echo "<td class='center-align' width='0px'></td>";
                     if ($percent2 >= 100.00)
-                    {echo "<td class='center-align' width='0px' style='background-color:#dc4814;'><h4>".number_format($sum2)."</h4></td>";
+                    {echo "<td class='center-align' width='0px' style='background-color:#dc4814;'><b>".number_format($sum2)."</b></td>";
                     }elseif ($percent2 >= 75.00)
-                    {echo "<td class='center-align' width='0px' style='background-color:#e99e7c;'><h4>".number_format($sum2)."</h4></td>";
+                    {echo "<td class='center-align' width='0px' style='background-color:#e99e7c;'><b>".number_format($sum2)."</b></td>";
                     }else
-                    {echo "<td class='center-align' width='0px'><h4>".number_format($sum2)."</h4></td>";
+                    {echo "<td class='center-align' width='0px'><b>".number_format($sum2)."</b></td>";
                     }
 
                     echo "<td class='center-align' width='0px'></td>";
                     if ($percent3 >= 100.00)
-                    {echo "<td class='center-align' width='0px' style='background-color:#dc4814;'><h4>".number_format($sum3)."</h4></td>";
+                    {echo "<td class='center-align' width='0px' style='background-color:#dc4814;'><b>".number_format($sum3)."</b></td>";
                     }elseif ($percent3 >= 75.00)
-                    {echo "<td class='center-align' width='0px' style='background-color:#e99e7c;'><h4>".number_format($sum3)."</h4></td>";
+                    {echo "<td class='center-align' width='0px' style='background-color:#e99e7c;'><b>".number_format($sum3)."</b></td>";
                     }else
-                    {echo "<td class='center-align' width='0px'><h4>".number_format($sum3)."</h4></td>";
+                    {echo "<td class='center-align' width='0px'><b>".number_format($sum3)."</b></td>";
                     }
 
                     echo "<td class='center-align' width='0px'></td>";
                     if ($percent4 >= 100.00)
-                    {echo "<td class='center-align' width='0px' style='background-color:#dc4814;'><h4>".number_format($sum4)."</h4></td>";
+                    {echo "<td class='center-align' width='0px' style='background-color:#dc4814;'><b>".number_format($sum4)."</b></td>";
                     }elseif ($percent4 >= 75.00)
-                    {echo "<td class='center-align' width='0px' style='background-color:#e99e7c;'><h4>".number_format($sum4)."</h4></td>";
+                    {echo "<td class='center-align' width='0px' style='background-color:#e99e7c;'><b>".number_format($sum4)."</b></td>";
                     }else
-                    {echo "<td class='center-align' width='0px'><h4>".number_format($sum4)."</h4></td>";
+                    {echo "<td class='center-align' width='0px'><b>".number_format($sum4)."</b></td>";
                     }
 
                     echo "<td class='center-align' width='0px'></td>";
                     if ($percent5 >= 100.00)
-                    {echo "<td class='center-align' width='0px' style='background-color:#dc4814;'><h4>".number_format($sum5)."</h4></td>";
+                    {echo "<td class='center-align' width='0px' style='background-color:#dc4814;'><b>".number_format($sum5)."</b></td>";
                     }elseif ($percent5 >= 75.00)
-                    {echo "<td class='center-align' width='0px' style='background-color:#e99e7c;'><h4>".number_format($sum5)."</h4></td>";
+                    {echo "<td class='center-align' width='0px' style='background-color:#e99e7c;'><b>".number_format($sum5)."</b></td>";
                     }else
-                    {echo "<td class='center-align' width='0px'><h4>".number_format($sum5)."</h4></td>";
+                    {echo "<td class='center-align' width='0px'><b>".number_format($sum5)."</b></td>";
                     }
 
                 echo "</tr>";
 
                 echo "<tr>";
-                    echo "<td class='grey'><h4>% Used</h4></td>";
+                    echo "<td class='grey'><b>% Used</b></td>";
                     if ($percent1 >= 75.00 && $percent1 <= 99)
                     {
-                        echo "<td colspan='2' class='center-align' style='background-color:#e99e7c;' width='0px'><h4>".number_format($percent1,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' style='background-color:#e99e7c;' width='0px'><b>".number_format($percent1,2)."%</b></td>";
                     }
                     elseif ($percent1 >= 100.00)
                     {
-                        echo "<td colspan='2' class='center-align' style='background-color:#dc4814;' width='0px'><h4>".number_format($percent1,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' style='background-color:#dc4814;' width='0px'><b>".number_format($percent1,2)."%</b></td>";
                     }
                     else
                     {
-                        echo "<td colspan='2' class='center-align' width='0px'><h4>".number_format($percent1,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' width='0px'><b>".number_format($percent1,2)."%</b></td>";
                     }
 
 
@@ -328,15 +328,15 @@ group by displayCcy;";
 
                     if ($percent2 >= 75.00 && $percent2 <= 99)
                     {
-                        echo "<td colspan='2' class='center-align' style='background-color:#e99e7c;' width='0px'><h4>".number_format($percent2,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' style='background-color:#e99e7c;' width='0px'><b>".number_format($percent2,2)."%</b></td>";
                     }
                     elseif ($percent2 >= 100.00)
                     {
-                        echo "<td colspan='2' class='center-align' style='background-color:#dc4814;' width='0px'><h4>".number_format($percent2,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' style='background-color:#dc4814;' width='0px'><b>".number_format($percent2,2)."%</b></td>";
                     }
                     else
                     {
-                        echo "<td colspan='2' class='center-align' width='0px'><h4>".number_format($percent2,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' width='0px'><b>".number_format($percent2,2)."%</b></td>";
                     }
 
 
@@ -346,15 +346,15 @@ group by displayCcy;";
 
                     if ($percent3 >= 75.00 && $percent3 <= 99)
                     {
-                        echo "<td colspan='2' class='center-align' style='background-color:#e99e7c;' width='0px'><h4>".number_format($percent3,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' style='background-color:#e99e7c;' width='0px'><b>".number_format($percent3,2)."%</b></td>";
                     }
                     elseif ($percent3 >= 100.00)
                     {
-                        echo "<td colspan='2' class='center-align' style='background-color:#dc4814;' width='0px'><h4>".number_format($percent3,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' style='background-color:#dc4814;' width='0px'><b>".number_format($percent3,2)."%</b></td>";
                     }
                     else
                     {
-                        echo "<td colspan='2' class='center-align' width='0px'><h4>".number_format($percent3,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' width='0px'><b>".number_format($percent3,2)."%</b></td>";
                     }
 
 
@@ -364,15 +364,15 @@ group by displayCcy;";
 
                     if ($percent4 >= 75.00 && $percent4 <= 99)
                     {
-                        echo "<td colspan='2' class='center-align' style='background-color:#e99e7c;' width='0px'><h4>".number_format($percent4,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' style='background-color:#e99e7c;' width='0px'><b>".number_format($percent4,2)."%</b></td>";
                     }
                     elseif ($percent4 >= 100.00)
                     {
-                        echo "<td colspan='2' class='center-align' style='background-color:#dc4814;' width='0px'><h4>".number_format($percent4,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' style='background-color:#dc4814;' width='0px'><b>".number_format($percent4,2)."%</b></td>";
                     }
                     else
                     {
-                        echo "<td colspan='2' class='center-align' width='0px'><h4>".number_format($percent4,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' width='0px'><b>".number_format($percent4,2)."%</b></td>";
                     }
 
 
@@ -382,15 +382,15 @@ group by displayCcy;";
 
                     if ($percent5 >= 75.00 && $percent5 <= 99)
                     {
-                        echo "<td colspan='2' class='center-align' style='background-color:#e99e7c;' width='0px'><h4>".number_format($percent5,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' style='background-color:#e99e7c;' width='0px'><b>".number_format($percent5,2)."%</b></td>";
                     }
                     elseif ($percent5 >= 100.00)
                     {
-                        echo "<td colspan='2' class='center-align' style='background-color:#dc4814;' width='0px'><h4>".number_format($percent5,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' style='background-color:#dc4814;' width='0px'><b>".number_format($percent5,2)."%</b></td>";
                     }
                     else
                     {
-                        echo "<td colspan='2' class='center-align' width='0px'><h4>".number_format($percent5,2)."%</h4></td>";
+                        echo "<td colspan='2' class='center-align' width='0px'><b>".number_format($percent5,2)."%</b></td>";
                     }
 
 
@@ -400,12 +400,12 @@ group by displayCcy;";
                 echo "</tr>";
 
                 echo "<tr>";
-                    echo "<td class='grey'><h4>Tier Limit</h4></td>";
-                    echo "<td colspan='2' class='center-align' width='0px'><h4>".number_format($limits['tier1'])."</h4></td>";
-                    echo "<td colspan='2' class='center-align' width='0px'><h4>".number_format($limits['tier2'])."</h4></td>";
-                    echo "<td colspan='2' class='center-align' width='0px'><h4>".number_format($limits['tier3'])."</h4></td>";
-                    echo "<td colspan='2' class='center-align' width='0px'><h4>".number_format($limits['tier4'])."</h4></td>";
-                    echo "<td colspan='2' class='center-align' width='0px'><h4>".number_format($limits['tier5'])."</h4></td>";
+                    echo "<td class='grey'><b>Tier Limit</b></td>";
+                    echo "<td colspan='2' class='center-align' width='0px'><b>".number_format($limits['tier1'])."</b></td>";
+                    echo "<td colspan='2' class='center-align' width='0px'><b>".number_format($limits['tier2'])."</b></td>";
+                    echo "<td colspan='2' class='center-align' width='0px'><b>".number_format($limits['tier3'])."</b></td>";
+                    echo "<td colspan='2' class='center-align' width='0px'><b>".number_format($limits['tier4'])."</b></td>";
+                    echo "<td colspan='2' class='center-align' width='0px'><b>".number_format($limits['tier5'])."</b></td>";
                 echo "</tr>";
             }else
             {

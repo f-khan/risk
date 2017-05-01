@@ -8,14 +8,16 @@
     </script>
     <script>
     $(document).ready(function(){
-    setInterval(function(){cache_clear()},300000);
+    setInterval(function(){cache_clear()},900000);
     });
     function cache_clear()
     {
     window.location.reload(true);
     }
     </script>
-
+    <link href="inc/barIndicator/css/bi-style.css" rel="stylesheet" />
+    <script src="inc/barIndicator/jquery-barIndicator.js"></script>
+    <script src="inc/barIndicator/jquery.easing.1.3.js"></script>
 
     <link rel="stylesheet" type="text/css" href="inc/style.css">
         <style>
@@ -26,8 +28,9 @@
     <center><img width="300" class="logo" src="images/UnicornLogo.png"></center>
     <?php 
         include('inc/connection.php');
-        $clientFirm = $_GET['link'];
-        if (empty($_GET['link']))
+        $clientFirm     = $_GET['link'];
+
+        if (empty($_GET['link']) )
         {
             header('Location: nop.php');
             exit;         
@@ -100,8 +103,17 @@ order by clientGroup, displayCcy;
                 ";
 
         $result = mysql_query($sql);
+        $data = Array();
+        while($row = mysql_fetch_array($result))
+        {
+            $data[] = $row;
+        }
         $query_clientFirm = "select clientFirm from do.nop_clients where clientGroup = '$clientFirm' order by clientFirm";
         $result_clientFirm = mysql_query($query_clientFirm);
+
+        $query_limit = mysql_query("select clientLimit from do.nop_clients where clientGroup = '$clientFirm' order by clientFirm;");
+        $result_clientFirm_limit = mysql_fetch_assoc($query_limit);
+        $clientLimit = $result_clientFirm_limit['clientLimit'];
 
         $query = mysql_query($sql);
         $row = mysql_fetch_array($query);
@@ -130,19 +142,6 @@ order by clientGroup, displayCcy;
     </h1>
         <h3 align="center">
         Client Firms:
-        <font style='color:#dc4814;'>
-        <?php /*
-            if (mysql_num_rows($result_clientFirm) > 0)
-            {
-                $str = "";
-                while($row = mysql_fetch_assoc($result_clientFirm))
-                {
-                    $str .= $row['clientFirm'].", ";
-                }
-                echo rtrim($str,", ");
-            }
-        */?> 
-        </font>
 
 
         <?php 
@@ -157,14 +156,34 @@ order by clientGroup, displayCcy;
                     echo " <a href='nopBreakdownFirm.php?group=$clientFirm&firm=".$str[$c]."'>".$str[$c]."</a> | ";
                     $c++;
                 }
-                //echo rtrim($str,", ");
             }
-            //var_dump($str[2]);
         ?> 
 
 
         </h3>
     <h4 align="center">Data As At: <?php echo $time." ".$today;?></h4>
+    <?php 
+    if ($data)
+    {
+        $total_USD_NOP_sum = 0;
+        foreach($data as $i => $item)
+        {
+            if ($data[$i]['amt'] != 0)
+            {
+                $total_USD_NOP_sum = $total_USD_NOP_sum + $data[$i]['USD_NOP_sum'];
+            }
+        }
+    }
+    else
+    {
+        $total_USD_NOP_sum = 0;
+    }
+    $utilisation = ($total_USD_NOP_sum/$clientLimit)*100;
+    //$utilisation = 75;
+    if ($utilisation >100)
+        $utilisation = 100;
+    ?>
+    <span id="bar"><?php echo number_format($utilisation,2);?></span>
     <h2>NOP Breakdown</h2>
     <table class="bordered table1">
         <thead>
@@ -178,54 +197,48 @@ order by clientGroup, displayCcy;
         </thead>
         <?php
 
-            if (mysql_num_rows($result) > 0)
+            if ($data)
             {
-                $total_USD_NOP_sum = 0;
-                while($row = mysql_fetch_assoc($result))
+                foreach($data as $i => $item)
                 {
-                    if ($row['amt'] != 0)
+                    if ($data[$i]['amt'] != 0)
                     {
                         echo "<tr>";
-                            echo "<td class='grey'>".$row['displayCcy']."</td>";
-                            if ($row['amt'] < 0)
+                            echo "<td class='grey'>".$data[$i]['displayCcy']."</td>";
+                            if ($data[$i]['amt'] < 0)
                             {
-                                echo "<td class='left-align' width='0px' style='color:red;'>".negformat(number_format($row['amt']))."</td>";
+                                echo "<td class='left-align' width='0px' style='color:#dc4814;'>".negformat(number_format($data[$i]['amt']))."</td>";
                             }
                             else
                             {
-                                echo "<td class='left-align' width='0px'>".number_format($row['amt'])."</td>";
+                                echo "<td class='left-align' width='0px'>".number_format($data[$i]['amt'])."</td>";
                             }
 
-                            if ($row['amt'] < 0)
+                            if ($data[$i]['amt'] < 0)
                             {
-                                echo "<td class='left-align' width='0px'>".number_format($row['USDRate'],6)."</td>";
+                                echo "<td class='left-align' width='0px'>".number_format($data[$i]['USDRate'],6)."</td>";
                             }
                             else
                             {
-                                echo "<td class='left-align' width='0px'>".number_format($row['USDRate'],6)."</td>";
+                                echo "<td class='left-align' width='0px'>".number_format($data[$i]['USDRate'],6)."</td>";
                             }
 
-
-                            //echo "<td class='left-align' width='0px'>".number_format($row['USDRate'],6)."</td>";
-
-                            if ($row['USDEquiv'] < 0)
+                            if ($data[$i]['USDEquiv'] < 0)
                             {
-                                echo "<td class='left-align' width='0px' style='color:red;'>".negformat(number_format($row['USDEquiv']))."</td>";
+                                echo "<td class='left-align' width='0px' style='color:#dc4814;'>".negformat(number_format($data[$i]['USDEquiv']))."</td>";
                             }
                             else
                             {
-                                echo "<td class='left-align' width='0px'>".number_format($row['USDEquiv'])."</td>";
+                                echo "<td class='left-align' width='0px'>".number_format($data[$i]['USDEquiv'])."</td>";
                             }
 
-                            echo "<td class='left-align' width='0px'>".number_format($row['USD_NOP_sum'])."</td>";
-
-                            $total_USD_NOP_sum = $total_USD_NOP_sum + $row['USD_NOP_sum'];
+                            echo "<td class='left-align' width='0px'>".number_format($data[$i]['USD_NOP_sum'])."</td>";
                         echo "</tr>";
                     }
                 }
                 echo "<tr>";
-                    echo "<td colspan = '4' class = 'total'><h3>Total</h3></td>";
-                    echo "<td class='left-align' width='0px'><h3>".number_format($total_USD_NOP_sum)."</h3></td>";
+                    echo "<td colspan = '4' class = 'total'><b>Total</b></td>";
+                    echo "<td class='left-align' width='0px'><b>".number_format($total_USD_NOP_sum)."</b></td>";
                 echo "</tr>";
             }
             else
@@ -265,7 +278,7 @@ order by clientGroup, displayCcy;
                         echo "<td class='grey'>".$row['symbol']."</td>";
                         if ($row['position'] < 0)
                         {
-                            echo "<td class='left-align' width='0px' style='color:red;'>".negformat(number_format($row['position']))."</td>";
+                            echo "<td class='left-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['position']))."</td>";
                         }
                         else
                         {
@@ -276,7 +289,7 @@ order by clientGroup, displayCcy;
 
                         /*if ($row['amt'] < 0)
                         {
-                            echo "<td class='left-align' width='0px' style='color:red;'>".negformat(number_format($row['amt']))."</td>";
+                            echo "<td class='left-align' width='0px' style='color:#dc4814;'>".negformat(number_format($row['amt']))."</td>";
                         }
                         else
                         {
@@ -299,4 +312,73 @@ order by clientGroup, displayCcy;
  </center>
  <br>
  <center><p>&copy; Copyright Unicorn. All rights reserved.</p></center>
+<script type="text/javascript">
+$(document).ready(function (e) {
+    var opt = {
+    milestones: {
+      0: {
+       mlPos: 0,
+       mlId: false,
+       mlClass: 'bi-custom',
+       mlDim: '100%',
+       mlLabel: '0',
+       mlLabelVis: 'visible',
+       mlHoverRange: 15,
+       mlLineWidth: 1
+      },
+      1: {
+       mlPos: 25,
+       mlId: false,
+       mlClass: 'bi-custom',
+       mlDim: '100%',
+       mlLabel: '25',
+       mlLabelVis: 'visible',
+       mlHoverRange: 15,
+       mlLineWidth: 1
+      },
+      2: {
+       mlPos: 50,
+       mlId: false,
+       mlClass: 'bi-custom',
+       mlDim: '100%',
+       mlLabel: '50',
+       mlLabelVis: 'visible',
+       mlHoverRange: 15,
+       mlLineWidth: 1
+      },
+      3: {
+       mlPos: 75,
+       mlId: false,
+       mlClass: 'bi-custom',
+       mlDim: '100%',
+       mlLabel: '75',
+       mlLabelVis: 'visible',
+       mlHoverRange: 15,
+       mlLineWidth: 1
+      },
+      4: {
+       mlPos: 100,
+       mlId: false,
+       mlClass: 'bi-custom',
+       mlDim: '100%',
+       mlLabel: '100',
+       mlLabelVis: 'visible',
+       mlHoverRange: 15,
+       mlLineWidth: 1
+      },
+    },
+    horTitle:'<b>Current Utilisation</b><br/><br/><br/>',
+    colorRange:true,
+    animTime:500,
+    horBarHeight:25,
+    colorRangeLimits: {     
+    optimal: '0-50',
+    alert: '51-75',
+    critical: '75-100',
+    } 
+    };
+    $('#bar').barIndicator(opt);
+    $('#bar').animate({easing:'easeInOutBounce'});
+});
+</script>
 </body></html>
